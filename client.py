@@ -50,15 +50,19 @@ class Client:
 if __name__ == "__main__":
     client = Client(base_url="http://127.0.0.1:5000")
 
-    # Upload a file
     try:
-        file_path = input("Enter a file path:\n")
-        uid = client.upload(file_path)
-        print(f"Uploaded file UID: {uid}")
+        while True:
+            choise = input("Press 1 to upload file, 2 to check status and 3 for quit: ")
+            if choise == '1':
+                file_path = input("Enter a file path:\n")
+                print( "The unique identifier is: " + client.upload(file_path))
 
-        # Check the status
-        status = client.status(uid)
-        print(status)
+            elif choise == '2':
+                uid = input("Enter the unique identifier:\n")
+                status = client.status(uid)
+                print(status)
+            else:
+                break
 
     except requests.exceptions.RequestException as e:
         print(f"An error occurred: {e}")
